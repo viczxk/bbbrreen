@@ -1,0 +1,39 @@
+name: Reconnaissance
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  scan-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Dependencies
+        run: |
+          sudo apt-get update && sudo apt-get install -y wget unzip jq
+          wget https://github.com/projectdiscovery/nuclei/releases/download/v3.3.5/nuclei_3.3.5_linux_amd64.zip
+          unzip -o nuclei_3.3.5_linux_amd64.zip && sudo mv nuclei /usr/bin/
+          sudo chmod +x /usr/bin/nuclei && sudo rm -rf nuclei* *.md
+          
+      - name: Running 
+        run: |
+          curl -s "https://gist.githubusercontent.com/Mrnormro/afed69949ac4532715cca6131f642f09/raw/3b9a658970ede69e347be2c5d9b9ddb2497e9a82/bin.txt" | nuclei -silent -nc -attack-type pitchfork | tee Nuclei/result.$(date +%Y-%m-%d).txt
+          
+      - name: Set up Git user
+        run: |
+          git config --global user.email "${{ secrets.EMAIL_ADDRESS }}"
+          git config --global user.name "${{ secrets.USER_NAME }}"
+          
+      - name: Commit changes
+        run: |
+          git add Nuclei/result.$(date +%Y-%m-%d).txt
+          git commit -m "Result scan $(date -u)" --no-verify
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.PERSONAL_ACCES_TOKEN }}
+          branch: master
