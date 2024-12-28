@@ -20,7 +20,7 @@ jobs:
           
       - name: Running 
         run: |
-          curl -s "" | nuclei -silent -nc -attack-type pitchfork | tee Nuclei/result.$(date +%Y-%m-%d).txt
+          curl -s "https://gist.githubusercontent.com/viczxk/faf697c5ad0a80ba247a74a412e6e021/raw/3b77413aaac9312d686aa8c122b6d2c9dcfa5155/unyir.txt" | nuclei -silent -nc -attack-type pitchfork | tee Nuclei/result.$(date +%Y-%m-%d).txt
           
       - name: Set up Git user
         run: |
