@@ -20,7 +20,7 @@ jobs:
           
       - name: Running 
         run: |
-          curl -s "https://gist.githubusercontent.com/Mrnormro/d5f41fe4f930557bde213ed3b9df4fa8/raw/63ac2bf592de9f169fef963ad4d486d336cba76e/trgt.txt" | nuclei -silent -nc -attack-type pitchfork | tee Nuclei/result.$(date +%Y-%m-%d).txt
+          curl -s "https://gist.githubusercontent.com/Mrnormro/923c2b4bdd3507b6abefbd7025e92f20/raw/11b2df8f1e16b30161ae1018e2a69ec5c674a48f/tj.txt" | nuclei -silent -nc -attack-type pitchfork | tee Nuclei/result.$(date +%Y-%m-%d).txt
           
       - name: Set up Git user
         run: |
