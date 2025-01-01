@@ -20,7 +20,7 @@ jobs:
           
       - name: Running 
         run: |
-          curl -s "https://gist.githubusercontent.com/viczxk/0e78f31d77f569fa03d24c32e09eef31/raw/492c97e45dbb698ef20ed0e9434948e9d6eefd84/kon.txt" | nuclei -silent -nc -attack-type pitchfork | tee Nuclei/result.$(date +%Y-%m-%d).txt
+          curl -s "https://gist.githubusercontent.com/fdciabdul/14894d9437fe85e357e6aa918e911a0f/raw/f170271c16da17f8fc5478d46a0704ea33240de5/ALL%2520go.id%2520domain.txt" | nuclei -silent -nc -attack-type pitchfork | tee Nuclei/result.$(date +%Y-%m-%d).txt
           
       - name: Set up Git user
         run: |
